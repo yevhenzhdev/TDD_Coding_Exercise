@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ScoreBoard
 {
-    class GamesRepositoryOnCollections : IGameRepository
+    internal class GamesRepositoryOnCollections : IGameRepository
     {
         private readonly ILogger _logger;
         private readonly List<IGame> _games = new List<IGame>();
@@ -18,22 +15,52 @@ namespace ScoreBoard
 
         public void AddGame(IGame game)
         {
-            throw new NotImplementedException();
-        }
-
-        public List<IGame> GetCurrentGames()
-        {
-            throw new NotImplementedException();
+            if (game == null || _games.Contains(game))
+            {
+                _logger.Log("Can't add a new game into repository because it is already exists game or arg is invalid");
+            }
+            else
+            {
+                game.Id = GetMaxId() + 1;
+                _games.Add(game);
+            }
         }
 
         public void RemoveGame(IGame game)
         {
-            throw new NotImplementedException();
+            if (game != null && _games.Contains(game))
+            {
+                _games.Remove(game);
+            }
+            else
+            {
+                _logger.Log("Can't remove the game from repository because there is no such game or arg is invalid");
+            }
         }
 
-        public void UpdateGameScore(IGame game)
+        public List<IGame> GetCurrentGames()
         {
-            throw new NotImplementedException();
+            return _games;
+        }
+
+        public void UpdateGameScore(IGame gameWithNewScore)
+        {
+            if (gameWithNewScore != null && _games.Contains(gameWithNewScore))
+            {
+                var gameToUpdate = _games.First(g => g.Equals(gameWithNewScore));
+
+                gameToUpdate.HomeTeamScore = gameWithNewScore.HomeTeamScore;
+                gameToUpdate.AwayTeamScore = gameWithNewScore.AwayTeamScore;
+            }
+            else
+            {
+                _logger.Log("Can't update the game score in repository because there is no such game or arg is invalid");
+            }
+        }
+
+        private int GetMaxId()
+        {
+            return _games.Count == 0 ? 0 : _games.Max(game => game.Id);
         }
     }
 }

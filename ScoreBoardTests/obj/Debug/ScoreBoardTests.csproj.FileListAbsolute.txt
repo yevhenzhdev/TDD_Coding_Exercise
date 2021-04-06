@@ -20,3 +20,5 @@ C:\Users\Z\source\repos\TDD_Coding_Exercise\ScoreBoardTests\bin\Debug\System.Thr
 C:\Users\Z\source\repos\TDD_Coding_Exercise\ScoreBoardTests\obj\Debug\ScoreBoardTests.csproj.CopyComplete
 C:\Users\Z\source\repos\TDD_Coding_Exercise\ScoreBoardTests\obj\Debug\ScoreBoardTests.dll
 C:\Users\Z\source\repos\TDD_Coding_Exercise\ScoreBoardTests\obj\Debug\ScoreBoardTests.pdb
+C:\Users\Z\source\repos\TDD_Coding_Exercise\ScoreBoardTests\bin\Debug\Ninject.dll
+C:\Users\Z\source\repos\TDD_Coding_Exercise\ScoreBoardTests\bin\Debug\Ninject.xml

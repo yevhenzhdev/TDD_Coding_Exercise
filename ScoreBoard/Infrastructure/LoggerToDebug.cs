@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 
-namespace ScoreBoard.Infrastructure
+namespace ScoreBoard
 {
-    class Logger : ILogger
+    class LoggerToDebug : ILogger
     {
         public void Log(string message)
         {
