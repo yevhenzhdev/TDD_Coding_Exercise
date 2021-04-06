@@ -180,6 +180,10 @@ namespace ScoreBoardTests
             Assert.AreEqual(string.Empty, result);
         }
 
+        /// <summary>
+        /// Tests that method returns correct message with marches result
+        /// </summary>
+        /// <remarks>This test demonstrates satisfaction to thee acceptence criteria, defined in task conditions</remarks>
         [TestMethod]
         public void GetGamesSummaryByTotalScore_GamesAdded_ReturnsCorrectResult()
         {
