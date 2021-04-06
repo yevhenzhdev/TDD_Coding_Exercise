@@ -1,4 +1,4 @@
-﻿namespace ScoreProcessor
+﻿namespace ScoreBoard
 {
     /// <summary>
     /// Interface for class that provides games service features

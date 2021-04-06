@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ScoreProcessor
+namespace ScoreBoard
 {
     /// <summary>
     /// Interface for classes represent match

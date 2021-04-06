@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ScoreProcessor
+namespace ScoreBoard
 {
     /// <summary>
     /// Interface for class provides CRUD game operations in data storage

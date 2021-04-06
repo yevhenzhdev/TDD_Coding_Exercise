@@ -1,0 +1,5 @@
+C:\Users\Z\source\repos\TDD_Coding_Exercise\ScoreBoard\bin\Debug\ScoreBoard.dll
+C:\Users\Z\source\repos\TDD_Coding_Exercise\ScoreBoard\bin\Debug\ScoreBoard.pdb
+C:\Users\Z\source\repos\TDD_Coding_Exercise\ScoreBoard\obj\Debug\ScoreBoard.csproj.CoreCompileInputs.cache
+C:\Users\Z\source\repos\TDD_Coding_Exercise\ScoreBoard\obj\Debug\ScoreBoard.dll
+C:\Users\Z\source\repos\TDD_Coding_Exercise\ScoreBoard\obj\Debug\ScoreBoard.pdb
