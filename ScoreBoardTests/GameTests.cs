@@ -23,6 +23,37 @@ namespace ScoreBoardTests
             Assert.AreEqual(0, game.Id);
         }
 
+        #region Equals(object obj) method tests
+        [TestMethod]
+        public void EqualsObj_TeamNamesAreTheSame_ReturnsTrue()
+        {
+            //Arrange
+            var game1 = new Game("A", "B");
+            var game2 = new Game("A", "B");
+
+            //Act
+            var areEqual = game1.Equals(game2 as object);
+
+            //Assert
+            Assert.IsTrue(areEqual);
+        }
+
+        [TestMethod]
+        public void EqualsObj_TeamNamesAreDifferent_ReturnsFalse()
+        {
+            //Arrange
+            var game1 = new Game("A", "b");
+            var game2 = new Game("A", "B");
+
+            //Act
+            var areEqual = game1.Equals(game2 as object);
+
+            //Assert
+            Assert.IsFalse(areEqual);
+        }
+        #endregion
+
+        #region Equals(IGame other) method tests
         [TestMethod]
         public void Equals_TeamNamesAreTheSame_ReturnsTrue()
         {
@@ -63,7 +94,9 @@ namespace ScoreBoardTests
             //Assert
             Assert.IsFalse(areEqual);
         }
+        #endregion
 
+        #region GetHashCode method tests
         [TestMethod]
         public void GetHashCode_ReturnsCorrectValue()
         {
@@ -129,7 +162,9 @@ namespace ScoreBoardTests
             //Assert
             Assert.AreNotEqual(game1Hash, game2Hash);
         }
+        #endregion
 
+        #region CompareTo method tests
         [TestMethod]
         public void CompareTo_TotalScoresEqual_ReturnsCorrectValues()
         {
@@ -183,5 +218,6 @@ namespace ScoreBoardTests
             Assert.AreEqual(1, resultGame1);
             Assert.AreEqual(-1, resultGame2);
         }
+        #endregion
     }
 }

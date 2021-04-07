@@ -3,7 +3,7 @@
 namespace ScoreBoard
 {
     /// <summary>
-    /// Interface for classes represent match
+    /// Interface for classes represent sport game
     /// </summary>
     internal interface IGame : IEquatable<IGame>, IComparable<IGame>
     {

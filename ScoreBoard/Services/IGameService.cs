@@ -23,15 +23,15 @@
         /// Updates csore in particular game
         /// </summary>
         /// <param name="homeTeamName">Home team name</param>
+        /// <param name="homeTeamNewScore">New value of home team score</param>
         /// <param name="awayTeamName">Away team name</param>
-        /// <param name="awayTeamName">New value of home team score</param>
-        /// <param name="awayTeamScore">New value of away team score</param>
-        void UpdateScore(string homeTeamName, int homeTeamScore, string awayTeamName, int awayTeamScore);
+        /// <param name="awayTeamNewScore">New value of away team score</param>
+        void UpdateScore(string homeTeamName, int homeTeamNewScore, string awayTeamName, int awayTeamNewScore);
 
         /// <summary>
         /// Gets a summary of games by total score
         /// </summary>
-        /// <returns>String represents info summary of games by total score</returns>
+        /// <returns>String represents summary info of games by total score</returns>
         /// <remarks>Those games with the same total score will be returned ordered by 
         /// the most recently added to our system</remarks>
         string GetGamesSummaryByTotalScore();

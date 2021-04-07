@@ -1,21 +1,39 @@
-﻿using Ninject;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
+using Ninject;
+using ScoreBoard.Properties;
 
 namespace ScoreBoard
 {
+    /// <summary>
+    /// Class provides games service features
+    /// </summary>
     public class GameService : IGameService
     {
+        /// <summary>
+        /// Object provides CRUD game operations in data storage
+        /// </summary>
         private IGameRepository _gameRepository;
+
+        /// <summary>
+        /// Object provides logging features
+        /// </summary>
         private ILogger _logger;
 
         #region Constructors
+        /// <summary>
+        /// Creates instance of <see cref="GameService"/>
+        /// </summary>
         public GameService()
         {
             _gameRepository = new StandardKernel(new NinjectConfig()).Get<IGameRepository>();
             _logger = new StandardKernel(new NinjectConfig()).Get<ILogger>();
         }
 
+        /// <summary>
+        /// Creates instance of <see cref="GameService"/>
+        /// </summary>
+        /// <remarks>This constructor intended for unit testing purposes</remarks>
         internal GameService(IGameRepository gameRepository, ILogger logger)
         {
             _gameRepository = gameRepository;
@@ -23,11 +41,16 @@ namespace ScoreBoard
         }
         #endregion
 
+        /// <summary>
+        /// Adds game into system
+        /// </summary>
+        /// <param name="homeTeamName">Home team name</param>
+        /// <param name="awayTeamName">Away team name</param>
         public void StartGame(string homeTeamName, string awayTeamName)
         {
             if (!AreTeamNamesValid(homeTeamName, awayTeamName))
             {
-                _logger.Log("Team names are invalid");
+                _logger.Log(Resources.ServiceInvalidTeamNamesMsg);
             }
             else
             {
@@ -35,11 +58,16 @@ namespace ScoreBoard
             }
         }
 
+        /// <summary>
+        /// Removes game from system
+        /// </summary>
+        /// <param name="homeTeamName">Home team name</param>
+        /// <param name="awayTeamName">Away team name</param>
         public void FinishGame(string homeTeamName, string awayTeamName)
         {
             if (!AreTeamNamesValid(homeTeamName, awayTeamName))
             {
-                _logger.Log("Team names are invalid");
+                _logger.Log(Resources.ServiceInvalidTeamNamesMsg);
             }
             else
             {
@@ -47,17 +75,24 @@ namespace ScoreBoard
             }
         }
 
-        public void UpdateScore(string homeTeamName, int homeTeamScore, string awayTeamName, int awayTeamScore)
+        /// <summary>
+        /// Updates csore in particular game
+        /// </summary>
+        /// <param name="homeTeamName">Home team name</param>
+        /// <param name="homeTeamNewScore">New value of home team score</param>
+        /// <param name="awayTeamName">Away team name</param>
+        /// <param name="awayTeamNewScore">New value of away team score</param>
+        public void UpdateScore(string homeTeamName, int homeTeamNewScore, string awayTeamName, int awayTeamNewScore)
         {
             bool validationFailed = false;
             if (!AreTeamNamesValid(homeTeamName, awayTeamName))
             {
-                _logger.Log("Team names are invalid");
+                _logger.Log(Resources.ServiceInvalidTeamNamesMsg);
                 validationFailed = true;
             }
-            if (homeTeamScore < 0 || awayTeamScore < 0)
+            if (homeTeamNewScore < 0 || awayTeamNewScore < 0)
             {
-                _logger.Log("Team scores are invalid");
+                _logger.Log(Resources.ServiceInvalidTeamScoresMsg);
                 validationFailed = true;
             }
             if (validationFailed)
@@ -67,18 +102,24 @@ namespace ScoreBoard
 
             var gameWithNewScore = new Game(homeTeamName, awayTeamName)
             {
-                HomeTeamScore = homeTeamScore,
-                AwayTeamScore = awayTeamScore
+                HomeTeamScore = homeTeamNewScore,
+                AwayTeamScore = awayTeamNewScore
             };
             _gameRepository.UpdateGameScore(gameWithNewScore);
         }
 
+        /// <summary>
+        /// Gets a summary of games by total score
+        /// </summary>
+        /// <returns>String represents summary info of games by total score</returns>
+        /// <remarks>Those games with the same total score will be returned ordered by 
+        /// the most recently added to our system</remarks>
         public string GetGamesSummaryByTotalScore()
         {
             var currentGames = _gameRepository.GetCurrentGames();
             if (currentGames.Count == 0)
             {
-                _logger.Log("Can't get games summary by total score due to games absence in repository");
+                _logger.Log(Resources.ServiceNoGamesForSummaryMsg);
                 return string.Empty;
             }
             else
@@ -87,6 +128,12 @@ namespace ScoreBoard
             }
         }
 
+        #region Private methods
+        /// <summary>
+        /// Builds games sammary information by total score with sorting
+        /// </summary>
+        /// <param name="games">Collection of games</param>
+        /// <returns>String with games summary info</returns>
         private string BuildGamesSummaryByTotalScore(List<IGame> games)
         {
             games.Sort();
@@ -105,6 +152,12 @@ namespace ScoreBoard
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Defines whether any team name is invalid.
+        /// </summary>
+        /// <param name="homeTeamName">Home team name</param>
+        /// <param name="awayTeamName">Away team name</param>
+        /// <returns>True if names are valid, otherwise - false</returns>
         private bool AreTeamNamesValid(string homeTeamName, string awayTeamName)
         {
             if (string.IsNullOrEmpty(homeTeamName) ||
@@ -113,5 +166,6 @@ namespace ScoreBoard
             else
                 return true;
         }
+        #endregion
     }
 }

@@ -22,11 +22,11 @@ namespace ScoreBoard
         /// <summary>
         /// Updates score in particular game
         /// </summary>
-        /// <param name="game">Game object to be updated with new score</param>
+        /// <param name="game">Game object with new score values</param>
         void UpdateGameScore(IGame game);
 
         /// <summary>
-        /// Gets all current games currently present in system
+        /// Gets all games currently present in system
         /// </summary>
         /// <returns>Collections of game objects</returns>
         List<IGame> GetCurrentGames();
