@@ -19,10 +19,3 @@ __________
 Since client code uses pair of team names for game identification, let's accept it as main game identifying criteria.
 Assuming there are impossible case within championship when two games take part with the same names of Home team and Awy team.
 
-
-p.s. Sorry for delay, I couldn't spend much time for task due to prerelease stage on my current project. There only two devs in our team (me and lead-dev) - so there a bit responsibilities on each of teammember))
-
-Tried to do my best.
-Best regards, 
-Yevhen.
-
